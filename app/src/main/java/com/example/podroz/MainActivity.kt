@@ -3,10 +3,14 @@ package com.example.podroz
 import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextPaint
+import android.text.TextWatcher
 import android.util.Log
 import android.widget.*
+import java.lang.Math.abs
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.*
 
 lateinit var TexTPocz: TextView
@@ -19,8 +23,10 @@ lateinit var ButtonKon: Button
 
 lateinit var Suwak: SeekBar
 lateinit var TexTSuw: TextView
+lateinit var EditSym: EditText
+lateinit var BSym: Button
 
-lateinit var MCalender: CalendarView
+lateinit var MainCalender: CalendarView
 
 
 
@@ -41,6 +47,8 @@ class MainActivity : AppCompatActivity() {
 
         Suwak = findViewById<SeekBar>(R.id.seekBar)
         TexTSuw = findViewById<TextView>(R.id.textViewSuwak)
+        EditSym = findViewById<EditText>(R.id.editTextSym)
+        BSym = findViewById<Button>(R.id.buttonSym)
 
         TexTPocz = findViewById<TextView>(R.id.textViewPocz)
         TexTSRD  = findViewById<TextView>(R.id.textViewSRD)
@@ -50,9 +58,42 @@ class MainActivity : AppCompatActivity() {
         ButtonSRD = findViewById<Button>(R.id.ButtonSrd)
         ButtonKon = findViewById<Button>(R.id.ButtonKon)
 
-        MCalender = findViewById<CalendarView>(R.id.MainCalender)
+        MainCalender = findViewById<CalendarView>(R.id.MainCalender)
 
-        
+
+
+
+        var Edit:String=""
+        /*
+        EditSym.addTextChangedListener(object : TextWatcher {
+
+            override fun afterTextChanged(s: Editable) {}
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) =
+
+
+                if(Edit.toInt()>10 && Edit.toInt() <20){
+
+                    Edit = EditSym.getText().toString();
+                    Suwak.setProgress(Edit.toFloat().toInt()/10)
+                    TexTSuw.text = Edit.toString()
+                }else{
+                    Toast.makeText(this@MainActivity, "Liczba musi byc w przedziale od 1.0 do 2.0", Toast.LENGTH_SHORT).show()
+                }
+
+
+
+
+        })
+
+         */
+
+
 
 
         val DatePicker1 = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
@@ -61,6 +102,7 @@ class MainActivity : AppCompatActivity() {
             MyClanedar.set(Calendar.MONTH,month)
             MyClanedar.set(Calendar.DAY_OF_MONTH,dayOfMonth)
             updateLable(MyClanedar)
+
 
         }
         val DatePicker2 = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
@@ -85,6 +127,7 @@ class MainActivity : AppCompatActivity() {
             DatePickerDialog(this,DatePicker1, MyClanedar.get(Calendar.YEAR), MyClanedar.get(Calendar.MONTH),
                 MyClanedar.get(Calendar.DAY_OF_MONTH)).show()
 
+
         }
         ButtonSRD.setOnClickListener{
             DatePickerDialog(this,DatePicker2, MyClanedar.get(Calendar.YEAR), MyClanedar.get(Calendar.MONTH),
@@ -102,11 +145,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
-
-
-
-
+            //progresss
 
 
 
@@ -139,7 +178,23 @@ class MainActivity : AppCompatActivity() {
 
         })
 
+        /*
+        BSym.setOnClickListener{
+
+
+
+            val difference: Long = abs(FirstT.time - ThirdT.time)
+            val differenceDates = difference / (24 * 60 * 60 * 1000)
+            val dayDifference = differenceDates.toString()
+            textView.text = "The difference between two dates is $dayDifference days"
+        }
+         */
     }
+
+
+
+
+    //Private
 
     private fun updateLable(myClanedar: Calendar) {
         val MyFormat="dd-MM-yyyy"
