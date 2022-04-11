@@ -20,6 +20,8 @@ lateinit var ButtonKon: Button
 lateinit var Suwak: SeekBar
 lateinit var TexTSuw: TextView
 
+lateinit var MCalender: CalendarView
+
 
 
 
@@ -47,6 +49,10 @@ class MainActivity : AppCompatActivity() {
         ButtonPocz = findViewById<Button>(R.id.ButtonPocz)
         ButtonSRD = findViewById<Button>(R.id.ButtonSrd)
         ButtonKon = findViewById<Button>(R.id.ButtonKon)
+
+        MCalender = findViewById<CalendarView>(R.id.MainCalender)
+
+        
 
 
         val DatePicker1 = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
