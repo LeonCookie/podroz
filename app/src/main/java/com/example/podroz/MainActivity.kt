@@ -4,10 +4,8 @@ import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextPaint
-import android.widget.Button
-import android.widget.DatePicker
-import android.widget.SeekBar
-import android.widget.TextView
+import android.util.Log
+import android.widget.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -26,6 +24,9 @@ lateinit var TexTSuw: TextView
 
 
 //Calendars and buttons
+var First: String = ""
+var Second: String = ""
+var Third: String = ""
 
 val MyClanedar = Calendar.getInstance()
 
@@ -77,14 +78,18 @@ class MainActivity : AppCompatActivity() {
         ButtonPocz.setOnClickListener{
             DatePickerDialog(this,DatePicker1, MyClanedar.get(Calendar.YEAR), MyClanedar.get(Calendar.MONTH),
                 MyClanedar.get(Calendar.DAY_OF_MONTH)).show()
+
         }
         ButtonSRD.setOnClickListener{
             DatePickerDialog(this,DatePicker2, MyClanedar.get(Calendar.YEAR), MyClanedar.get(Calendar.MONTH),
                 MyClanedar.get(Calendar.DAY_OF_MONTH)).show()
+
+
         }
          ButtonKon.setOnClickListener{
             DatePickerDialog(this,DatePicker3, MyClanedar.get(Calendar.YEAR), MyClanedar.get(Calendar.MONTH),
                 MyClanedar.get(Calendar.DAY_OF_MONTH)).show()
+
         }
 
 
@@ -104,7 +109,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        var a:Float
+        var a:Float//zmienna w seekbar
 
         Suwak.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int,fromUser: Boolean) {
@@ -134,15 +139,18 @@ class MainActivity : AppCompatActivity() {
         val MyFormat="dd-MM-yyyy"
         val sdf=SimpleDateFormat(MyFormat, Locale.GERMAN)
         TexTPocz.setText(sdf.format(MyClanedar.time))
+        First = (sdf.format(MyClanedar.time))
     }
     private fun updateLable2(myClanedar: Calendar) {
         val MyFormat="dd-MM-yyyy"
         val sdf=SimpleDateFormat(MyFormat, Locale.GERMAN)
         TexTSRD.setText(sdf.format(MyClanedar.time))
+        Second = (sdf.format(MyClanedar.time))
     }
     private fun updateLable3(myClanedar: Calendar) {
         val MyFormat="dd-MM-yyyy"
         val sdf=SimpleDateFormat(MyFormat, Locale.GERMAN)
         TexTKon.setText(sdf.format(MyClanedar.time))
+        Third = (sdf.format(MyClanedar.time))
     }
 }
