@@ -1,26 +1,40 @@
 package com.example.podroz
 
+import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextPaint
 import android.widget.Button
+import android.widget.DatePicker
 import android.widget.SeekBar
 import android.widget.TextView
+import java.text.SimpleDateFormat
+import java.util.*
+
+lateinit var TexTPocz: TextView
+lateinit var TexTSRD: TextView
+lateinit var TexTKon: TextView
+
+lateinit var ButtonPocz: Button
+lateinit var ButtonSRD: Button
+lateinit var ButtonKon: Button
+
+lateinit var Suwak: SeekBar
+lateinit var TexTSuw: TextView
+
+
+
+
+//Calendars and buttons
+
+val MyClanedar = Calendar.getInstance()
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        lateinit var TexTPocz: TextView
-        lateinit var TexTSRD: TextView
-        lateinit var TexTKon: TextView
-
-        lateinit var ButtonPocz: Button
-        lateinit var ButtonSRD: Button
-        lateinit var ButtonKon: Button
-
-        lateinit var Suwak: SeekBar
-        lateinit var TexTSuw: TextView
 
         Suwak = findViewById<SeekBar>(R.id.seekBar)
         TexTSuw = findViewById<TextView>(R.id.textViewSuwak)
@@ -30,6 +44,34 @@ class MainActivity : AppCompatActivity() {
         TexTKon  = findViewById<TextView>(R.id.textViewKon)
 
         ButtonPocz = findViewById<Button>(R.id.ButtonPocz)
+
+
+        val DatePicker = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+
+            MyClanedar.set(Calendar.YEAR,year)
+            MyClanedar.set(Calendar.MONTH,month)
+            MyClanedar.set(Calendar.DAY_OF_MONTH,dayOfMonth)
+            updateLable(MyClanedar)
+
+        }
+
+        ButtonPocz.setOnClickListener{
+            DatePickerDialog(this,DatePicker, MyClanedar.get(Calendar.YEAR), MyClanedar.get(Calendar.MONTH),
+                MyClanedar.get(Calendar.DAY_OF_MONTH)).show()
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -58,5 +100,11 @@ class MainActivity : AppCompatActivity() {
 
         })
 
+    }
+
+    private fun updateLable(myClanedar: Calendar) {
+        val MyFormat="dd-MM-yyyy"
+        val sdf=SimpleDateFormat(MyFormat, Locale.GERMAN)
+        TexTPocz.setText(sdf.format(MyClanedar.time))
     }
 }
